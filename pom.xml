@@ -12,10 +12,13 @@
 	<!-- Project information -->
 	<groupId>net.milkbowl.vault</groupId>
 	<artifactId>Vault</artifactId>
-	<version>${api.version}.3</version>
+	<version>${api.version}.4</version>
 	<name>Vault</name>
-	<url>https://dev.bukkit.org/projects/vault</url>
-	<description>Vault is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
+	<url>https://github.com/AMGewka/ProtoVault</url>
+	<description>
+		ProtoVault (Fork Vault) — это API для работы с чатом, правами доступа и экономикой, которое позволяет плагинам легче взаимодействовать с этими системами без необходимости напрямую подключаться к каждой из них.
+	</description>
+
 
 
 
@@ -83,7 +86,7 @@
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit</artifactId>
-			<version>3.0.0</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.hydrox.bukkit</groupId>
@@ -255,7 +258,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.13.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -264,7 +267,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>3.6.0</version>
 				<configuration>
 					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<artifactSet>

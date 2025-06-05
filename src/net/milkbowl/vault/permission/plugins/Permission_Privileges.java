@@ -24,12 +24,12 @@ public class Permission_Privileges extends Permission {
     public Permission_Privileges(Plugin plugin) {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
-        // Load service in case it was loaded before
+        // Загружаем службу, если она уже была загружена
         if (privs == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("Privileges");
             if (perms != null && perms.isEnabled()) {
                 this.privs = (Privileges) perms;
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
@@ -47,7 +47,7 @@ public class Permission_Privileges extends Permission {
                 Plugin perms = event.getPlugin();
                 if (perms.getDescription().getName().equals("Privileges")) {
                     permission.privs = (Privileges) perms;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -57,7 +57,7 @@ public class Permission_Privileges extends Permission {
             if (permission.privs != null) {
                 if (event.getPlugin().getDescription().getName().equals("Privileges")) {
                     permission.privs = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -132,7 +132,7 @@ public class Permission_Privileges extends Permission {
     public String[] getPlayerGroups(String world, String player) {
         OfflinePlayer p = Bukkit.getOfflinePlayer(player);
         if (p == null) {
-            throw new UnsupportedOperationException("Privileges does not support offline players.");
+            throw new UnsupportedOperationException("Privileges не поддерживает оффлайн-игроков.");
         }
         Group g = privs.getGroupManager().getGroup(p);
         return g != null ? g.getGroupTree().toArray(new String[g.getGroupTree().size()]) : null;

@@ -45,7 +45,7 @@ public class Permission_OverPermissions extends Permission {
                 overPerms = ((OverPermissions) perms);
                 userManager = overPerms.getUserManager();
                 groupManager = overPerms.getGroupManager();
-                log.info(String.format("[%s][Permission] %s hooked.", new Object[] {plugin.getDescription().getName(), "OverPermissions"}));
+                log.info(String.format("[%s][Permission] %s подключён.", new Object[] {plugin.getDescription().getName(), "OverPermissions"}));
             }
         }
     }
@@ -205,7 +205,7 @@ public class Permission_OverPermissions extends Permission {
                 if (perms != null) {
                     permission.overPerms = ((OverPermissions) perms);
                     Permission_OverPermissions.log.info(String
-                            .format("[%s][Permission] %s hooked.", new Object[] {Permission_OverPermissions.this.plugin.getDescription().getName(), "OverPermissions"}));
+                            .format("[%s][Permission] %s подключён.", new Object[] {Permission_OverPermissions.this.plugin.getDescription().getName(), "OverPermissions"}));
                 }
             }
         }
@@ -217,7 +217,7 @@ public class Permission_OverPermissions extends Permission {
                     (event.getPlugin().getDescription().getName().equals("OverPermissions"))) {
                 permission.overPerms = null;
                 Permission_OverPermissions.log.info(String
-                        .format("[%s][Permission] %s un-hooked.", new Object[] {Permission_OverPermissions.this.plugin.getDescription().getName(), "OverPermissions"}));
+                        .format("[%s][Permission] %s отключён.", new Object[] {Permission_OverPermissions.this.plugin.getDescription().getName(), "OverPermissions"}));
             }
         }
     }

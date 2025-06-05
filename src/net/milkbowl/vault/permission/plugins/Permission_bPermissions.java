@@ -40,26 +40,26 @@ public class Permission_bPermissions extends Permission {
     public Permission_bPermissions(Plugin plugin) {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(), plugin);
-        
-        // Load Plugin in case it was loaded before
+
+        // Загрузить плагин, если он уже был загружен
         if (perms == null) {
             Plugin p = plugin.getServer().getPluginManager().getPlugin("bPermissions");
             if (p != null) {
                 perms = Permissions.getWorldPermissionsManager();
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
 
     public class PermissionServerListener implements Listener {
-        
+
         @EventHandler(priority = EventPriority.MONITOR)
         public void onPluginEnable(PluginEnableEvent event) {
             if (perms == null) {
                 Plugin p = event.getPlugin();
                 if(p.getDescription().getName().equals("bPermissions") && p.isEnabled()) {
                     perms = Permissions.getWorldPermissionsManager();
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -69,11 +69,13 @@ public class Permission_bPermissions extends Permission {
             if (perms != null) {
                 if (event.getPlugin().getDescription().getName().equals("bPermissions")) {
                     perms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
     }
+
+
 
     @Override
     public String getName() {
@@ -266,7 +268,7 @@ public class Permission_bPermissions extends Permission {
 
     @Override
     public String[] getGroups() {
-        throw new UnsupportedOperationException("bPermissions does not support server-wide groups");
+        throw new UnsupportedOperationException("bPermissions не поддерживает группы на уровне всего сервера");
     }
 
     @Override

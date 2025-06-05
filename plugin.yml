@@ -1,7 +1,7 @@
 name: ${project.name}
-version: ${project.version}-b${env.TRAVIS_BUILD_NUMBER}
+version: ${project.version}-PROTO
 description: ${project.description}
-authors: [cereal, Sleaker, mung3r]
+authors: [AMGewka, cereal, Sleaker, mung3r]
 website: ${project.url}
 api-version: 1.13
 
@@ -10,16 +10,17 @@ load: startup
 
 commands:
   vault-info:
-    description: Displays information about Vault 
+    description: Показывает информацию о Vault
     usage: |
-           /<command> - Displays Vault information
+      /<command> - Показывает информацию о Vault
     permission: vault.admin
   vault-convert:
-    description: Converts all data in economy1 and dumps it into economy2
+    description: Конвертирует все данные из economy1 и переносит их в economy2
     usage: |
-           /<command> [economy1] [economy2]
+      /<command> [economy1] [economy2]
     permission: vault.admin
+
 permissions:
   vault.admin:
-    description: Notifies the player when vault is in need of an update.
+    description: Уведомляет игрока, когда Vault нуждается в обновлении
     default: op

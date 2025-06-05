@@ -40,12 +40,12 @@ public class Permission_SimplyPerms extends Permission{
     public Permission_SimplyPerms(Plugin plugin) {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
-        // Load service in case it was loaded before
+        // Загрузка службы, если она уже была загружена ранее
         if (perms == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("SimplyPerms");
             if (perms != null && perms.isEnabled()) {
                 this.perms = ((SimplyPlugin) perms).getAPI();
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
@@ -63,7 +63,7 @@ public class Permission_SimplyPerms extends Permission{
                 Plugin perms = event.getPlugin();
                 if (perms.getDescription().getName().equals("SimplyPerms")) {
                     permission.perms = ((SimplyPlugin) perms).getAPI();
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -73,7 +73,7 @@ public class Permission_SimplyPerms extends Permission{
             if (permission.perms != null) {
                 if (event.getPlugin().getDescription().getName().equals("SimplyPerms")) {
                     permission.perms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }

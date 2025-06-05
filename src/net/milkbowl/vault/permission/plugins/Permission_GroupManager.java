@@ -45,12 +45,12 @@ public class Permission_GroupManager extends Permission {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
 
-        // Load Plugin in case it was loaded before
+        // Загрузить плагин, если он уже был загружен
         if (groupManager == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("GroupManager");
             if (perms != null && perms.isEnabled()) {
                 groupManager = (GroupManager) perms;
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
@@ -68,7 +68,7 @@ public class Permission_GroupManager extends Permission {
                 Plugin p = event.getPlugin();
                 if (p.getDescription().getName().equals("GroupManager")) {
                     permission.groupManager = (GroupManager) p;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -78,7 +78,7 @@ public class Permission_GroupManager extends Permission {
             if (permission.groupManager != null) {
                 if (event.getPlugin().getDescription().getName().equals("GroupManager")) {
                     permission.groupManager = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }

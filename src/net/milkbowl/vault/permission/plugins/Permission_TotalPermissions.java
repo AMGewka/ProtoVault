@@ -50,7 +50,7 @@ public class Permission_TotalPermissions extends Permission {
                 if (permPlugin.getDescription().getName().equals(name)) {
                     totalperms = (TotalPermissions) permPlugin;
                     manager = totalperms.getManager();
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -61,7 +61,7 @@ public class Permission_TotalPermissions extends Permission {
                 if (event.getPlugin().getDescription().getName().equals(name)) {
                     totalperms = null;
                     manager = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -101,7 +101,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }
@@ -114,7 +114,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }
@@ -133,7 +133,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }
@@ -146,7 +146,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }
@@ -166,7 +166,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }
@@ -179,7 +179,7 @@ public class Permission_TotalPermissions extends Permission {
             return true;
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE,
-                    String.format("[%s] An error occured while saving perms", totalperms.getDescription().getName()), ex);
+                    String.format("[%s] Произошла ошибка при сохранении прав", totalperms.getDescription().getName()), ex);
             return false;
         }
     }

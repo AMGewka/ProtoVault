@@ -1,17 +1,17 @@
-/* This file is part of Vault.
+/* Этот файл является частью Vault.
 
-    Vault is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    Vault — это свободное программное обеспечение: вы можете распространять его и/или изменять
+    на условиях Стандартной Общественной Лицензии GNU Lesser, опубликованной
+    Фондом Свободного Программного Обеспечения, либо версии 3 лицензии, либо
+    (на ваш выбор) любой более поздней версии.
 
-    Vault is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+    Vault распространяется в надежде, что он будет полезен,
+    но БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; даже без подразумеваемой гарантии
+    КОММЕРЧЕСКОЙ ПРИГОДНОСТИ или ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЁННОЙ ЦЕЛИ. Подробнее см. в
+    Стандартной Общественной Лицензии GNU Lesser.
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with Vault.  If not, see <http://www.gnu.org/licenses/>.
+    Вы должны были получить копию Стандартной Общественной Лицензии GNU Lesser
+    вместе с Vault. Если нет, см. <http://www.gnu.org/licenses/>.
  */
 package net.milkbowl.vault.permission.plugins;
 
@@ -23,11 +23,11 @@ import org.bukkit.plugin.Plugin;
 public class Permission_SuperPerms extends Permission {
 
 	private final String name = "SuperPerms";
-	
+
 	public Permission_SuperPerms(Plugin plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;
@@ -49,7 +49,7 @@ public class Permission_SuperPerms extends Permission {
 		return false;
 	}
 
-	// use superclass implementation of playerAddTransient() and playerRemoveTransient()
+	// используется реализация по умолчанию playerAddTransient() и playerRemoveTransient()
 
 	@Override
 	public boolean playerRemove(String world, String player, String permission) {
@@ -58,17 +58,17 @@ public class Permission_SuperPerms extends Permission {
 
 	@Override
 	public boolean groupHas(String world, String group, String permission) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
 	public boolean groupAdd(String world, String group, String permission) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
 	public boolean groupRemove(String world, String group, String permission) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
@@ -78,22 +78,22 @@ public class Permission_SuperPerms extends Permission {
 
 	@Override
 	public boolean playerAddGroup(String world, String player, String group) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
 	public boolean playerRemoveGroup(String world, String player, String group) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
 	public String[] getPlayerGroups(String world, String player) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
 	public String getPrimaryGroup(String world, String player) {
-		throw new UnsupportedOperationException(getName() + " no group permissions.");
+		throw new UnsupportedOperationException(getName() + " не поддерживает групповые права.");
 	}
 
 	@Override
@@ -106,8 +106,8 @@ public class Permission_SuperPerms extends Permission {
 		return true;
 	}
 
-    @Override
-    public boolean hasGroupSupport() {
-        return false;
-    }
+	@Override
+	public boolean hasGroupSupport() {
+		return false;
+	}
 }

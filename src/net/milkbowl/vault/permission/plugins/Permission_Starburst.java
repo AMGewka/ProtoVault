@@ -45,12 +45,12 @@ public class Permission_Starburst extends Permission {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(), plugin);
 
-        // Load Plugin in case it was loaded before
+        // Загрузка плагина в случае, если он был загружен ранее
         if (perms == null) {
             Plugin p = plugin.getServer().getPluginManager().getPlugin("Starburst");
             if (p != null) {
                 perms = (StarburstPlugin) p;
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
@@ -63,7 +63,7 @@ public class Permission_Starburst extends Permission {
                 Plugin p = event.getPlugin();
                 if (p.getDescription().getName().equals("Starburst")) {
                     perms = (StarburstPlugin) p;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -73,7 +73,7 @@ public class Permission_Starburst extends Permission {
             if (perms != null) {
                 if (event.getPlugin().getDescription().getName().equals("Starburst")) {
                     perms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), name));
                 }
             }
         }

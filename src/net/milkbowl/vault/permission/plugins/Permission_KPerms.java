@@ -45,7 +45,7 @@ public class Permission_KPerms extends Permission {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("KPerms");
             if (perms != null && perms.isEnabled()) {
                 this.kperms = (KPermsPlugin) perms;
-                plugin.getLogger().info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), "KPerms"));
+                plugin.getLogger().info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), "KPerms"));
             }
         }
     }
@@ -63,7 +63,7 @@ public class Permission_KPerms extends Permission {
                 Plugin plugin = event.getPlugin();
                 if (plugin.getDescription().getName().equals("KPerms")) {
                     bridge.kperms = (KPermsPlugin) plugin;
-                    log.info(String.format("[%s][Permission] %s hooked.", vault.getDescription().getName(), "KPerms"));
+                    log.info(String.format("[%s][Permission] %s подключён.", vault.getDescription().getName(), "KPerms"));
                 }
             }
         }
@@ -73,11 +73,12 @@ public class Permission_KPerms extends Permission {
             if(bridge.kperms != null){
                 if(event.getPlugin().getDescription().getName().equals(bridge.kperms.getName())) {
                     bridge.kperms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", vault.getDescription().getName(), "KPerms"));
+                    log.info(String.format("[%s][Permission] %s отключён.", vault.getDescription().getName(), "KPerms"));
                 }
             }
         }
     }
+
 
     @Override
     public String getName() {

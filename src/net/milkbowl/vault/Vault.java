@@ -1,17 +1,17 @@
-/* This file is part of Vault.
+/* Этот файл является частью Vault.
 
-    Vault is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    Vault — это свободное программное обеспечение: вы можете распространять и/или
+    изменять его в соответствии с условиями Стандартной Общественной Лицензии GNU (LGPL),
+    опубликованной Фондом Свободного Программного Обеспечения, версии 3,
+    либо (на ваш выбор) любой более поздней версии.
 
-    Vault is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+    Vault распространяется в надежде, что он окажется полезным,
+    но БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; даже без подразумеваемой гарантии
+    КОММЕРЧЕСКОЙ ЦЕННОСТИ или ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЁННОЙ ЦЕЛИ.
+    Подробнее см. в Стандартной Общественной Лицензии GNU (LGPL).
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with Vault.  If not, see <http://www.gnu.org/licenses/>.
+    Вы должны были получить копию Стандартной Общественной Лицензии GNU
+    вместе с Vault. Если нет, смотрите <http://www.gnu.org/licenses/>.
  */
 package net.milkbowl.vault;
 
@@ -121,15 +121,14 @@ public class Vault extends JavaPlugin {
 
             @Override
             public void run() {
-                // Programmatically set the default permission value cause Bukkit doesn't handle plugin.yml properly for Load order STARTUP plugins
+                // Программно установить значение разрешения по умолчанию, потому что Bukkit некорректно обрабатывает plugin.yml для плагинов с порядком загрузки STARTUP
                 org.bukkit.permissions.Permission perm = getServer().getPluginManager().getPermission("vault.update");
-                if (perm == null)
-                {
+                if (perm == null) {
                     perm = new org.bukkit.permissions.Permission("vault.update");
                     perm.setDefault(PermissionDefault.OP);
                     plugin.getServer().getPluginManager().addPermission(perm);
                 }
-                perm.setDescription("Allows a user or the console to check for vault updates");
+                perm.setDescription("Позволяет пользователю или консоли проверять обновления Vault");
 
                 getServer().getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
 
@@ -137,16 +136,16 @@ public class Vault extends JavaPlugin {
                     public void run() {
                         if (getServer().getConsoleSender().hasPermission("vault.update") && getConfig().getBoolean("update-check", true)) {
                             try {
-                            	log.info("Checking for Updates ... ");
+                                log.info("Проверка обновлений...");
                                 newVersion = updateCheck(currentVersion);
                                 if (newVersion > currentVersion) {
-                                    log.warning("Stable Version: " + newVersionTitle + " is out!" + " You are still running version: " + currentVersionTitle);
-                                    log.warning("Update at: https://dev.bukkit.org/projects/vault");
+                                    log.warning("Доступна стабильная версия: " + newVersionTitle + "! Вы всё ещё используете версию: " + currentVersionTitle);
+                                    log.warning("Обновление доступно на: https://dev.bukkit.org/projects/vault");
                                 } else if (currentVersion > newVersion) {
-                                    log.info("Stable Version: " + newVersionTitle + " | Current Version: " + currentVersionTitle);
+                                    log.info("Стабильная версия: " + newVersionTitle + " | Текущая версия: " + currentVersionTitle);
                                 }
                             } catch (Exception e) {
-                                // ignore exceptions
+                                // игнорировать исключения
                             }
                         }
                     }
@@ -155,11 +154,12 @@ public class Vault extends JavaPlugin {
             }
         });
 
-        // Load up the Plugin metrics
+        // Загрузка метрик плагина
         Metrics metrics = new Metrics(this, 887);
         findCustomData(metrics);
 
-        log.info(String.format("Enabled Version %s", getDescription().getVersion()));
+        log.info(String.format("Включена версия %s", getDescription().getVersion()));
+
     }
 
     /**
@@ -257,39 +257,39 @@ public class Vault extends JavaPlugin {
 
         Permission perms = new Permission_SuperPerms(this);
         sm.register(Permission.class, perms, this, ServicePriority.Lowest);
-        log.info(String.format("[Permission] SuperPermissions loaded as backup permission system."));
+        log.info(String.format("[Permission] SuperPermissions загружена как резервная система прав."));
 
         this.perms = sm.getRegistration(Permission.class).getProvider();
     }
 
-    private void hookChat (String name, Class<? extends Chat> hookClass, ServicePriority priority, String...packages) {
+    private void hookChat(String name, Class<? extends Chat> hookClass, ServicePriority priority, String... packages) {
         try {
             if (packagesExists(packages)) {
                 Chat chat = hookClass.getConstructor(Plugin.class, Permission.class).newInstance(this, perms);
                 sm.register(Chat.class, chat, this, priority);
-                log.info(String.format("[Chat] %s found: %s", name, chat.isEnabled() ? "Loaded" : "Waiting"));
+                log.info(String.format("[Chat] %s найден: %s", name, chat.isEnabled() ? "Загружен" : "Ожидание"));
             }
         } catch (Exception e) {
-            log.severe(String.format("[Chat] There was an error hooking %s - check to make sure you're using a compatible version!", name));
+            log.severe(String.format("[Chat] Произошла ошибка при подключении %s — убедитесь, что вы используете совместимую версию!", name));
         }
     }
 
-    private void hookPermission (String name, Class<? extends Permission> hookClass, ServicePriority priority, String...packages) {
+    private void hookPermission(String name, Class<? extends Permission> hookClass, ServicePriority priority, String... packages) {
         try {
             if (packagesExists(packages)) {
                 Permission perms = hookClass.getConstructor(Plugin.class).newInstance(this);
                 sm.register(Permission.class, perms, this, priority);
-                log.info(String.format("[Permission] %s found: %s", name, perms.isEnabled() ? "Loaded" : "Waiting"));
+                log.info(String.format("[Permission] %s найден: %s", name, perms.isEnabled() ? "Загружен" : "Ожидание"));
             }
         } catch (Exception e) {
-            log.severe(String.format("[Permission] There was an error hooking %s - check to make sure you're using a compatible version!", name));
+            log.severe(String.format("[Permission] Произошла ошибка при подключении %s — убедитесь, что вы используете совместимую версию!", name));
         }
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         if (!sender.hasPermission("vault.admin")) {
-            sender.sendMessage("You do not have permission to use that command!");
+            sender.sendMessage("У вас нет прав для использования этой команды!");
             return true;
         }
 
@@ -300,10 +300,10 @@ public class Vault extends JavaPlugin {
             convertCommand(sender, args);
             return true;
         } else {
-            // Show help
-            sender.sendMessage("Vault Commands:");
-            sender.sendMessage("  /vault-info - Displays information about Vault");
-            sender.sendMessage("  /vault-convert [economy1] [economy2] - Converts from one Economy to another");
+            // Показать помощь
+            sender.sendMessage("Команды Vault:");
+            sender.sendMessage("  /vault-info - Показывает информацию о Vault");
+            sender.sendMessage("  /vault-convert [economy1] [economy2] - Конвертирует из одной экономики в другую");
             return true;
         }
     }
@@ -311,10 +311,10 @@ public class Vault extends JavaPlugin {
     private void convertCommand(CommandSender sender, String[] args) {
         Collection<RegisteredServiceProvider<Economy>> econs = this.getServer().getServicesManager().getRegistrations(Economy.class);
         if (econs == null || econs.size() < 2) {
-            sender.sendMessage("You must have at least 2 economies loaded to convert.");
+            sender.sendMessage("Необходимо загрузить как минимум 2 экономики для конвертации.");
             return;
         } else if (args.length != 2) {
-            sender.sendMessage("You must specify only the economy to convert from and the economy to convert to. (names should not contain spaces)");
+            sender.sendMessage("Вы должны указать только экономику, из которой конвертировать, и экономику, в которую конвертировать. (названия не должны содержать пробелов)");
             return;
         }
         Economy econ1 = null;
@@ -328,22 +328,22 @@ public class Vault extends JavaPlugin {
                 econ2 = econ.getProvider();
             }
             if (economies.length() > 0) {
-            	economies += ", ";
+                economies += ", ";
             }
             economies += econName;
         }
 
         if (econ1 == null) {
-            sender.sendMessage("Could not find " + args[0] + " loaded on the server, check your spelling.");
-            sender.sendMessage("Valid economies are: " + economies);
+            sender.sendMessage("Не удалось найти " + args[0] + " на сервере, проверьте правильность написания.");
+            sender.sendMessage("Доступные экономики: " + economies);
             return;
         } else if (econ2 == null) {
-            sender.sendMessage("Could not find " + args[1] + " loaded on the server, check your spelling.");
-            sender.sendMessage("Valid economies are: " + economies);
+            sender.sendMessage("Не удалось найти " + args[1] + " на сервере, проверьте правильность написания.");
+            sender.sendMessage("Доступные экономики: " + economies);
             return;
         }
 
-        sender.sendMessage("This may take some time to convert, expect server lag.");
+        sender.sendMessage("Конвертация может занять некоторое время, возможны лаги сервера.");
         for (OfflinePlayer op : Bukkit.getServer().getOfflinePlayers()) {
             if (econ1.hasAccount(op)) {
                 if (econ2.hasAccount(op)) {
@@ -352,14 +352,13 @@ public class Vault extends JavaPlugin {
                 econ2.createPlayerAccount(op);
                 double diff = econ1.getBalance(op) - econ2.getBalance(op);
                 if (diff > 0) {
-                	econ2.depositPlayer(op, diff);
+                    econ2.depositPlayer(op, diff);
                 } else if (diff < 0) {
-                	econ2.withdrawPlayer(op, -diff);
+                    econ2.withdrawPlayer(op, -diff);
                 }
-                
             }
         }
-        sender.sendMessage("Converson complete, please verify the data before using it.");
+        sender.sendMessage("Конвертация завершена, пожалуйста, проверьте данные перед использованием.");
     }
 
     private void infoCommand(CommandSender sender) {
@@ -415,10 +414,10 @@ public class Vault extends JavaPlugin {
             chat = rspc.getProvider();
         }
         // Send user some info!
-        sender.sendMessage(String.format("[%s] Vault v%s Information", getDescription().getName(), getDescription().getVersion()));
-        sender.sendMessage(String.format("[%s] Economy: %s [%s]", getDescription().getName(), econ == null ? "None" : econ.getName(), registeredEcons));
-        sender.sendMessage(String.format("[%s] Permission: %s [%s]", getDescription().getName(), perm == null ? "None" : perm.getName(), registeredPerms));
-        sender.sendMessage(String.format("[%s] Chat: %s [%s]", getDescription().getName(), chat == null ? "None" : chat.getName(), registeredChats));
+        sender.sendMessage(String.format("[%s] Vault v%s Информация", getDescription().getName(), getDescription().getVersion()));
+        sender.sendMessage(String.format("[%s] Экономика: %s [%s]", getDescription().getName(), econ == null ? "Отсутствует" : econ.getName(), registeredEcons));
+        sender.sendMessage(String.format("[%s] Права: %s [%s]", getDescription().getName(), perm == null ? "Отсутствует" : perm.getName(), registeredPerms));
+        sender.sendMessage(String.format("[%s] Чат: %s [%s]", getDescription().getName(), chat == null ? "Отсутствует" : chat.getName(), registeredChats));
     }
 
     /**
@@ -426,10 +425,11 @@ public class Vault extends JavaPlugin {
      * This is the best way to determine if a specific plugin exists and will be
      * loaded. If the plugin package isn't loaded, we shouldn't bother waiting
      * for it!
+     *
      * @param packages String Array of package names to check
      * @return Success or Failure
      */
-    private static boolean packagesExists(String...packages) {
+    private static boolean packagesExists(String... packages) {
         try {
             for (String pkg : packages) {
                 Class.forName(pkg);
@@ -452,26 +452,26 @@ public class Vault extends JavaPlugin {
             final JSONArray array = (JSONArray) JSONValue.parse(response);
 
             if (array.size() == 0) {
-                this.getLogger().warning("No files found, or Feed URL is bad.");
+                this.getLogger().warning("Файлы не найдены, или URL фида неверен.");
                 return currentVersion;
             }
-            // Pull the last version from the JSON
+            // Получаем последнюю версию из JSON
             newVersionTitle = ((String) ((JSONObject) array.get(array.size() - 1)).get("name")).replace("Vault", "").trim();
             return Double.valueOf(newVersionTitle.replaceFirst("\\.", "").trim());
         } catch (Exception e) {
-            log.info("There was an issue attempting to check for the latest version.");
+            log.info("Произошла ошибка при попытке проверить последнюю версию.");
         }
         return currentVersion;
     }
 
     private void findCustomData(Metrics metrics) {
-        // Create our Economy Graph and Add our Economy plotters
+        // Создаём график Экономики и добавляем значения
         RegisteredServiceProvider<Economy> rspEcon = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
         Economy econ = null;
         if (rspEcon != null) {
             econ = rspEcon.getProvider();
         }
-        final String econName = econ != null ? econ.getName() : "No Economy";
+        final String econName = econ != null ? econ.getName() : "Нет экономики";
         metrics.addCustomChart(new SimplePie("economy", new Callable<String>() {
             @Override
             public String call() {
@@ -479,7 +479,7 @@ public class Vault extends JavaPlugin {
             }
         }));
 
-        // Create our Permission Graph and Add our permission Plotters
+        // Создаём график Прав и добавляем значения
         final String permName = Bukkit.getServer().getServicesManager().getRegistration(Permission.class).getProvider().getName();
         metrics.addCustomChart(new SimplePie("permission", new Callable<String>() {
             @Override
@@ -488,13 +488,13 @@ public class Vault extends JavaPlugin {
             }
         }));
 
-        // Create our Chat Graph and Add our chat Plotters
+        // Создаём график Чата и добавляем значения
         RegisteredServiceProvider<Chat> rspChat = Bukkit.getServer().getServicesManager().getRegistration(Chat.class);
         Chat chat = null;
         if (rspChat != null) {
             chat = rspChat.getProvider();
         }
-        final String chatName = chat != null ? chat.getName() : "No Chat";
+        final String chatName = chat != null ? chat.getName() : "Нет чата";
         metrics.addCustomChart(new SimplePie("chat", new Callable<String>() {
             @Override
             public String call() {
@@ -511,11 +511,11 @@ public class Vault extends JavaPlugin {
             if (perms.has(player, "vault.update")) {
                 try {
                     if (newVersion > currentVersion) {
-                        player.sendMessage("Vault " +  newVersionTitle + " is out! You are running " + currentVersionTitle);
-                        player.sendMessage("Update Vault at: " + VAULT_BUKKIT_URL);
+                        player.sendMessage("Доступна новая версия Vault " + newVersionTitle + "! Вы используете " + currentVersionTitle);
+                        player.sendMessage("Обновите Vault здесь: " + VAULT_BUKKIT_URL);
                     }
                 } catch (Exception e) {
-                    // Ignore exceptions
+                    // Игнорировать исключения
                 }
             }
         }

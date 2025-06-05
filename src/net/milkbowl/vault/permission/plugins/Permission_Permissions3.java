@@ -45,7 +45,7 @@ public class Permission_Permissions3 extends Permission {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(), plugin);
 
-        // Load Plugin in case it was loaded before
+        // Загрузка плагина, если он уже был загружен ранее
         if (permission == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("Permissions");
             if (perms == null) {
@@ -56,8 +56,8 @@ public class Permission_Permissions3 extends Permission {
                 if (perms.isEnabled() && perms.getDescription().getVersion().startsWith("3")) {
                     permission = (Permissions) perms;
                     this.perms = (ModularControl) permission.getHandler();
-                    log.severe("Your permission system is outdated and no longer fully supported! It is highly advised to update!");
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                    log.severe("Ваша система прав устарела и больше не поддерживается полностью! Настоятельно рекомендуется обновиться!");
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -87,7 +87,7 @@ public class Permission_Permissions3 extends Permission {
                     if (permi.isEnabled()) {
                         permission = (Permissions) permi;
                         perms = (ModularControl) permission.getHandler();
-                        log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                        log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                     }
                 }
             }
@@ -99,7 +99,7 @@ public class Permission_Permissions3 extends Permission {
                 if (event.getPlugin().getDescription().getName().equals("Permissions") || event.getPlugin().getDescription().getName().equals("vPerms")) {
                     permission = null;
                     perms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), name));
                 }
             }
         }

@@ -42,20 +42,20 @@ public class Permission_PermissionsEx extends Permission {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
 
-        // Load Plugin in case it was loaded before
+        // Загрузка плагина, если он уже был загружен
         if (permission == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("PermissionsEx");
             if (perms != null) {
                 if (perms.isEnabled()) {
                     try {
                         if (Double.valueOf(perms.getDescription().getVersion()) < 1.16) {
-                            log.info(String.format("[%s][Permission] %s below 1.16 is not compatible with Vault! Falling back to SuperPerms only mode. PLEASE UPDATE!", plugin.getDescription().getName(), name));
+                            log.info(String.format("[%s][Permission] %s ниже версии 1.16 не совместим с Vault! Переход в режим только SuperPerms. ПОЖАЛУЙСТА ОБНОВИТЕ!", plugin.getDescription().getName(), name));
                         }
                     } catch (NumberFormatException e) {
-                        // Do nothing
+                        // Ничего не делаем
                     }
                     permission = (PermissionsEx) perms;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
                 }
             }
         }
@@ -84,14 +84,14 @@ public class Permission_PermissionsEx extends Permission {
                 if (perms.getDescription().getName().equals("PermissionsEx")) {
                     try {
                         if (Double.valueOf(perms.getDescription().getVersion()) < 1.16) {
-                            log.info(String.format("[%s][Permission] %s below 1.16 is not compatible with Vault! Falling back to SuperPerms only mode. PLEASE UPDATE!", plugin.getDescription().getName(), name));
+                            log.info(String.format("[%s][Permission] %s ниже версии 1.16 не совместим с Vault! Переход в режим только SuperPerms. ПОЖАЛУЙСТА ОБНОВИТЕ!", plugin.getDescription().getName(), name));
                             return;
                         }
                     } catch (NumberFormatException e) {
-                        // Do nothing
+                        // Ничего не делаем
                     }
                     permission.permission = (PermissionsEx) perms;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -101,7 +101,7 @@ public class Permission_PermissionsEx extends Permission {
             if (permission.permission != null) {
                 if (event.getPlugin().getDescription().getName().equals("PermissionsEx")) {
                     permission.permission = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }

@@ -41,12 +41,12 @@ public class Permission_PermissionsBukkit extends Permission {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
 
-        // Load Plugin in case it was loaded before
+        // Загрузка плагина, если он уже был загружен ранее
         if (perms == null) {
             Plugin perms = plugin.getServer().getPluginManager().getPlugin("PermissionsBukkit");
             if (perms != null) {
                 this.perms = (PermissionsPlugin) perms;
-                log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), name));
+                log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), name));
             }
         }
     }
@@ -64,7 +64,7 @@ public class Permission_PermissionsBukkit extends Permission {
                 Plugin perms = event.getPlugin();
                 if (perms.getDescription().getName().equals("PermissionsBukkit")) {
                     permission.perms = (PermissionsPlugin) perms;
-                    log.info(String.format("[%s][Permission] %s hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s подключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
@@ -74,11 +74,12 @@ public class Permission_PermissionsBukkit extends Permission {
             if (permission.perms != null) {
                 if (event.getPlugin().getDescription().getName().equals("PermissionsBukkit")) {
                     permission.perms = null;
-                    log.info(String.format("[%s][Permission] %s un-hooked.", plugin.getDescription().getName(), permission.name));
+                    log.info(String.format("[%s][Permission] %s отключён.", plugin.getDescription().getName(), permission.name));
                 }
             }
         }
     }
+
 
     @Override
     public String getName() {
